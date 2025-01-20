@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        smooch: ['Smooch Sans', 'sans-serif'], // Smooch Sans fontu tanımlandı
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -15,9 +18,13 @@ export default {
         },
         peach: {
           200: "#d4fcb2", // bg-peach-200
+          300:"#abc991"
         },
         antep:{
           200:"#a8ec74"
+        },
+        lacivert:{
+          200:"#335c67"
         }
 
       },
