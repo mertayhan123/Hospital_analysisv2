@@ -11,8 +11,7 @@ const CardComponents = ({
   analyzing,
 }) => {
   return (
-   
-     <div className="card card-side bg-base-100 shadow-xl flex md:w-[900px] mx-auto h-64">
+    <div className="card card-side bg-blush-200 shadow-xl flex md:w-[900px] mx-auto h-64">
       {!parsedText ? (
         <>
           <div className="flex items-center justify-center">
@@ -51,22 +50,25 @@ const CardComponents = ({
           </div>
         </>
       ) : (
-        <div className="card bg-primary text-primary-content md:w-[900px] h-64 ">
-          <div className="card-body">
+        <div className="card bg-blush-200  text-black md:w-[900px] h-64 ">
+          <div className="card-body flex justify-center items-center">
             <h2 className="card-title">Dosyanız Yüklendi</h2>
             <p>Lütfen analiz etmek için Analiz et butonuna basınız</p>
-            <div className="card-actions justify-end">
+            <div className="card-actions justify-end bg-white rounded-sm">
               <button
                 onClick={handleAnalyze}
-                className={`btn btn-secondary w-full ${
-                  analyzing ? "loading" : ""
-                }`}
+                className={`btn  w-full`}
                 disabled={analyzing}
               >
-                {analyzing
-                  ? "Analiz Ediliyor..."
-                  : "Metni Yapay Zeka ile Analiz Et"}
-              </button>{" "}
+                {analyzing ? (
+                  <>
+                    <span className="loading loading-spinner bg-slate-950 text-zinc-500"></span>
+                    Analiz Ediliyor...
+                  </>
+                ) : (
+                  "Metni Yapay Zeka ile Analiz Et"
+                )}
+              </button>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import CardComponents from "@/components/CardComponents";
 import { parse } from "dotenv";
+import AnalysisCard from "@/components/AnalysisCard";
 
 export default function Home() {
   const [pdfFile, setPdfFile] = useState(null);
@@ -69,21 +70,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-base-200 p-4">
+    <div className="min-h-screen bg-antep-200 p-8">
       <CardComponents loading={loading} handleFileChange={handleFileChange} handleUpload={handleUpload} parsedText={parsedText} handleAnalyze={handleAnalyze} analyzing={analyzing}/>
-
+      <AnalysisCard analysisResult={analysisResult} />
      
 
-      {analysisResult && (
-        <div className="max-w-md mx-auto bg-white p-4 rounded shadow">
-          <h2 className="text-lg font-bold mb-2">Yapay Zeka Analizi</h2>
-          <p className="text-sm whitespace-pre-wrap">{analysisResult}</p>
-          <div className="alert alert-warning mt-4">
-            Bu analiz bir doktor görüşü değildir. Kesin teşhis için uzman bir
-            doktora danışın.
-          </div>
-        </div>
-      )}
+      
     </div>
   );
 }
