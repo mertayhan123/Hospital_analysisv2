@@ -9,8 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "daisyui": "^4.12.23",
+    "dotenv": "^16.4.7",
+    "formidable": "^3.5.2",
     "next": "15.1.5",
+    "pdf-parse": "^1.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

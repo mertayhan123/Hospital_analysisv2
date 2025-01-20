@@ -1,101 +1,115 @@
-import Image from "next/image";
+"use client";
+import React, { useState } from 'react';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [pdfFile, setPdfFile] = useState(null);
+  const [parsedText, setParsedText] = useState('');
+  const [analysisResult, setAnalysisResult] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [analyzing, setAnalyzing] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const handleFileChange = (e) => {
+    setPdfFile(e.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!pdfFile) return;
+
+    setLoading(true);
+
+    const formData = new FormData();
+    formData.append('pdfFile', pdfFile);
+
+    try {
+      const res = await fetch('/api/up', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        setParsedText(data.text);
+      } else {
+        alert('PDF parse hatası: ' + data.error);
+      }
+    } catch (error) {
+      alert('Hata: ' + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ChatGPT ile analiz et
+  const handleAnalyze = async () => {
+    if (!parsedText) return;
+    setAnalyzing(true);
+    console.log('Analiz yapılıyor:', parsedText);
+  
+    try {
+      const res = await fetch('/api/analyzee', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userData: parsedText }), // userData key'ini ekledik
+      });
+  
+      const data = await res.json();
+      if (res.ok) {
+        setAnalysisResult(data.analysis);
+      } else {
+        console.error('Analiz hatası:', data.error);
+        alert('Analiz sırasında hata oluştu: ' + data.error);
+      }
+    } catch (error) {
+      console.error('Fetch hatası:', error);
+      alert('API ile iletişimde bir hata oluştu: ' + error.message);
+    } finally {
+      setAnalyzing(false);
+    }
+  };
+  
+
+  return (
+    <div className="min-h-screen bg-base-200 p-4">
+      <div className="max-w-md mx-auto bg-white p-4 rounded shadow mb-6">
+        <h1 className="text-xl font-bold mb-4">PDF Yükleme</h1>
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={handleFileChange}
+          className="file-input file-input-bordered w-full mb-4"
+        />
+        <button
+          onClick={handleUpload}
+          className={`btn btn-primary w-full ${loading ? 'loading' : ''}`}
+          disabled={loading}
+        >
+          {loading ? 'Yükleniyor...' : 'PDF’yi Yükle ve Parse Et'}
+        </button>
+      </div>
+
+      {parsedText && (
+        <div className="max-w-md mx-auto bg-white p-4 rounded shadow mb-6">
+          <h2 className="text-lg font-bold mb-2">PDF Metni</h2>
+          <pre className="text-sm whitespace-pre-wrap mb-4">{parsedText}</pre>
+          <button
+            onClick={handleAnalyze}
+            className={`btn btn-secondary w-full ${analyzing ? 'loading' : ''}`}
+            disabled={analyzing}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            {analyzing ? 'Analiz Ediliyor...' : 'Metni Yapay Zeka ile Analiz Et'}
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      )}
+
+      {analysisResult && (
+        <div className="max-w-md mx-auto bg-white p-4 rounded shadow">
+          <h2 className="text-lg font-bold mb-2">Yapay Zeka Analizi</h2>
+          <p className="text-sm whitespace-pre-wrap">{analysisResult}</p>
+          <div className="alert alert-warning mt-4">
+            Bu analiz bir doktor görüşü değildir. Kesin teşhis için uzman bir doktora danışın.
+          </div>
+        </div>
+      )}
     </div>
   );
 }
