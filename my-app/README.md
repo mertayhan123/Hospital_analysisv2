@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Akıllı Tahlil: Yapay Zeka Destekli Sağlık Analizi Uygulaması
 
-## Getting Started
+Akıllı Tahlil, kullanıcıların tahlil verilerini **yapay zeka** ile analiz ederek sağlık durumları hakkında tahminlerde bulunan bir web uygulamasıdır. Projemiz, kullanıcıların PDF formatındaki tahlil verilerini yükleyip, bu verilerin sağlıkla ilgili olası yorumlarını almasına olanak sağlar. Sistem, kullanıcıya bir **yapay zeka analizi** sunduğunu açıkça belirterek, analizlerin tahminlere dayalı olduğunu vurgular.
 
-First, run the development server:
+Proje, **Next.js**, **Tailwind CSS**, **DaisyUI**, **Framer Motion**, **Jotai** ve **Gemini AI** gibi teknolojiler kullanılarak geliştirilmiştir.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Özellikler
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **PDF Yükleme ve Analiz**: Kullanıcılar, tahlil verilerini PDF formatında yükleyebilir ve bu veriler yapay zeka tarafından analiz edilerek sağlık tahminleri yapılır.
+- **Yapay Zeka Destekli Tahminler**: Gemini AI tarafından yapılan analizler, kullanıcılara tahlil durumu, referans aralıkları, olası hastalıklar gibi bilgileri sunar.
+- **Resim Formatında Analiz**: İlerleyen zamanlarda, PDF yerine resim formatındaki verilerin de analiz edilmesi planlanmaktadır.
+- **Kullanıcı Dostu Arayüz**: Modern ve responsive tasarım, kullanıcıların veriye kolayca ulaşmasını sağlar. Animasyonlar ve dinamik geçişler ile kullanıcı deneyimi geliştirilmiştir.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Kullanılan Teknolojiler
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js**: Proje, hızlı sayfa yükleme ve SEO dostu yapısıyla Next.js üzerinde geliştirilmiştir.
+- **Tailwind CSS ve DaisyUI**: Kullanıcı dostu, modern ve responsive tasarım için Tailwind CSS ve DaisyUI kullanılmıştır.
+- **Framer Motion**: Kullanıcı deneyimini daha akıcı ve dinamik hale getirebilmek için Framer Motion kullanılmıştır.
+- **Jotai**: Uygulamanın state yönetimi için Jotai tercih edilmiştir.
+- **Gemini AI**: Tahlil verilerinin analizi için Gemini AI kullanılmıştır.
 
-## Learn More
+## Kurulum
 
-To learn more about Next.js, take a look at the following resources:
+Projeyi yerel bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Repository'yi klonlayın**:
+   ```bash
+   git clone https://github.com/kullaniciadi/akilli-tahlil.git
