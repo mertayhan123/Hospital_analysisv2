@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import pdf from "../public/image/pdf.png";
+import { useState } from "react";
 
 const CardComponents = ({
   handleFileChange,
@@ -9,9 +10,28 @@ const CardComponents = ({
   parsedText,
   handleAnalyze,
   analyzing,
+  showToast,
 }) => {
+    const [showCard, setShowCard] = useState(true); // Kartın görünürlüğünü kontrol eden state
+
+    const handleCompleteAnalysis = () => {
+      handleAnalyze(); // Analiz işlemini başlatır
+      if (!analyzing) {
+        setShowCard(false); // Analiz tamamlanınca kartı gizler
+      }
+    };
+
+    
+  
   return (
     <div className="card card-side bg-blush-200 shadow-xl flex md:w-[900px] mx-auto h-64">
+       {showToast && (
+        <div className="toast">
+          <div className="alert alert-info">
+            <span>Lütfen önce bir PDF dosyası yükleyin.</span>
+          </div>
+        </div>
+      )}
       {!parsedText ? (
         <>
           <div className="flex items-center justify-center">
@@ -53,11 +73,16 @@ const CardComponents = ({
         <div className="card bg-blush-200  text-black md:w-[900px] h-64 ">
           <div className="card-body flex justify-center items-center">
             <h2 className="card-title">Dosyanız Yüklendi</h2>
+
+            <div className="flex justify-center items-center">
             <p>Lütfen analiz etmek için Analiz et butonuna basınız</p>
-            <div className="card-actions justify-end bg-white rounded-sm">
+
+            </div>
+            <div className="card-actions justify-end rounded-sm mt-5">
+                
               <button
                 onClick={handleAnalyze}
-                className={`btn  w-full`}
+                className={`btn btn-primary  w-full`}
                 disabled={analyzing}
               >
                 {analyzing ? (

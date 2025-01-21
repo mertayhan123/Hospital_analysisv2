@@ -8,7 +8,7 @@ export const Question = () => {
         flex
         flex-col
         items-center
-        justify-center
+        justify-start
         bg-antep-200
         px-8
         pt-10
