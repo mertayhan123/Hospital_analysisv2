@@ -8,12 +8,18 @@ import { MdOutlineInput } from "react-icons/md";
 import doktor from "../public/image/doktor.png";
 import arrowdoctor from "../public/image/arrowdoctor.png";
 import Image from "next/image";
+import { useState } from "react";
 
 export const Maincomponents = () => {
   const router = useRouter(); // useRouter'u next/navigation'dan alıyoruz
 
   const handleButtonClick = () => {
     router.push("/main"); // '/' sayfasına yönlendirme
+  };
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -66,28 +72,74 @@ export const Maincomponents = () => {
           />
         </div>
       </div>
+     <div className="absolute left-10 top-[60%] w-full max-w-md  ">
+  {/* Diğer içeriğiniz burada olabilir */}
+
+  <div className="relative flex w-100 h-48 bg-peach-200 border-2 border-peach-200 rounded-lg shadow-md">
+    {/* Zarf Kapak */}
+    <div
+      className={`absolute w-full h-24 bg-peach-200 top-0 left-0 rounded-t-lg transform transition-transform duration-500 ${
+        isOpen ? "-translate-y-24" : ""
+      }`}
+    ></div>
+
+    {/* Kart */}
+    <div
+      className={`absolute w-100 h-32 bg-blush-200 top-6 left-4 shadow-lg rounded-lg border-2 border-gray-300 transition-transform duration-500 ${
+        isOpen ? "-translate-y-40" : "opacity-0"
+      }`}
+    >
+      <div className="p-4 text-gray-800  ">
+        <h2 className="text-xl font-bold">Hoşgeldiniz!</h2>
+        <p className="mt-2 text-sm">
+          Tahlil sonuçlarınızı yorumlatmak için Hadi Başlayalım butonuna
+          tıklayın ve Pdf yükleyerek yapay zekaya sonuçlarınızı yorumlatın.
+        </p>
+      </div>
+    </div>
+
+    {/* Zarf Alt */}
+    <div
+      className={`absolute w-full h-24 bg-peach-200 bottom-0 left-0 rounded-b-lg`}
+    ></div>
+
+    {/* Zarfın Üzerine Tıklama Alanı */}
+    <button
+      className="absolute w-full h-full top-0 left-0 rounded-lg focus:outline-none"
+      onClick={handleToggle}
+    >
+      <span className="text-gray-700 font-medium text-lg">Buraya tıklayın</span>
+    </button>
+  </div>
+</div>
+
 
       {/* Tahlil Sonucu Yükleme Kutusu */}
-      <div className="w-full max-w-md">
-        <div className="flex flex-col items-center border-2 border-dashed border-lacivert-200 rounded-md p-4">
-          <span className="text-lg md:text-xl text-lacivert-200">Tahlil Sonucu Yükleme</span>
-          <MdOutlineInput className="text-lacivert-200 text-2xl md:text-3xl" />
-        </div>
-        <div className="flex justify-center mt-4">
-          <button
-            onClick={handleButtonClick} // Yönlendirme işlemi burada
-            className="bg-lacivert-200 text-white font-bold py-3 px-6 rounded transition-colors duration-300 hover:bg-antep-200 hover:text-white"
-          >
-            Hadi Başlayalım
-          </button>
-        </div>
-        <div className="mt-4">
-          <Image
-            className="w-full h-auto object-cover rounded"
-            src={arrowdoctor}
-            alt="Akıllı Tahlil"
-          />
-        </div>
+      <div className="absolute right-8 top-[60%] w-full max-w-md">
+  <div className="flex flex-col items-center border-2 border-dashed border-lacivert-200 rounded-md p-4 ">
+    <span className="text-lg md:text-xl text-lacivert-200 text-center">Tahlil Sonucu Yükleme</span>
+    <MdOutlineInput className="text-lacivert-200 text-2xl md:text-3xl mt-2" />
+  </div>
+  <div className="flex justify-center mt-4">
+    <button
+      onClick={handleButtonClick} // Yönlendirme işlemi burada
+      className="bg-lacivert-200 text-white font-bold py-3 px-6 rounded transition-colors duration-300 hover:bg-antep-200 hover:text-white"
+    >
+      Hadi Başlayalım
+    </button>
+  </div>
+  <div className="mt-6">
+    <Image
+      className="w-[200px] h-auto object-contain rounded mx-auto"
+      src={arrowdoctor}
+      alt="Akıllı Tahlil"
+    />
+  </div>
+
+
+
+
+
       </div>
     </div>
   );
