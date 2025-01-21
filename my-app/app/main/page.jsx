@@ -1,26 +1,33 @@
 "use client";
-import React from 'react';
-import CardComponents from '@/components/CardComponents';
-import AnalysisCard from '@/components/AnalysisCard';
-import { useState } from 'react';
+
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import nurse from "../../public/image/nurse.png";
+import CardComponents from "@/components/CardComponents";
+import AnalysisCard from "@/components/AnalysisCard";
+import Loading from "@/components/Loading";
 
 const Page = () => {
+  const router = useRouter();
   const [pdfFile, setPdfFile] = useState(null);
   const [parsedText, setParsedText] = useState("");
   const [analysisResult, setAnalysisResult] = useState("");
   const [loading, setLoading] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const [showCardComponents, setShowCardComponents] = useState(true); // CardComponents görünürlüğünü kontrol eden state
+  const [showCardComponents, setShowCardComponents] = useState(true);
 
   const handleFileChange = (e) => {
     setPdfFile(e.target.files[0]);
   };
 
   const handleUpload = async () => {
-    if (!pdfFile) return (setShowToast(true), setTimeout(() => setShowToast(false), 2000));
+    if (!pdfFile) {
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2000);
+      return;
+    }
 
     setLoading(true);
 
@@ -49,9 +56,7 @@ const Page = () => {
   const handleAnalyze = async () => {
     if (!parsedText) return;
     setAnalyzing(true);
-    setLoading(true); // Loading durumunu başlat
-
-    console.log("Analiz yapılıyor:", parsedText);
+    setLoading(true);
 
     try {
       const res = await fetch("/api/analyze", {
@@ -63,7 +68,7 @@ const Page = () => {
       const data = await res.json();
       if (res.ok) {
         setAnalysisResult(data.analysis);
-        setShowCardComponents(false); // Analiz tamamlandıktan sonra CardComponents'i gizle
+        setShowCardComponents(false);
       } else {
         console.error("Analiz hatası:", data.error);
         alert("Analiz sırasında hata oluştu: " + data.error);
@@ -73,12 +78,21 @@ const Page = () => {
       alert("API ile iletişimde bir hata oluştu: " + error.message);
     } finally {
       setAnalyzing(false);
-      setLoading(false); // Loading durumunu durdur
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-antep-200 p-8">
+    <div className="min-h-screen bg-antep-200 p-8 flex flex-col items-center justify-start gap-8">
+      {/* Header */}
+      <header className="w-full text-center">
+        <h1 className="text-5xl font-bold text-peach-600">Akıllı Tahlil</h1>
+        <p className="mt-2 text-lg text-lacivert-500">
+          Sağlığınızı daha iyi anlayın ve bilinçli adımlar atın.
+        </p>
+      </header>
+
+      {/* Card Components */}
       {showCardComponents && !loading && (
         <CardComponents
           loading={loading}
@@ -91,26 +105,26 @@ const Page = () => {
         />
       )}
 
-      {loading && (
-        <div className="flex justify-center items-center h-screen">
-          <div className="spinner-border animate-spin inline-block w-16 h-16 border-4 rounded-full text-primary"></div>
-        </div>
-      )}
+      {/* Loading */}
+      {loading && <Loading />}
 
-      {!loading && analysisResult && (
-        <AnalysisCard analysisResult={analysisResult}  />
-      )}
+      {/* Analysis Result */}
+      {!loading && analysisResult && <AnalysisCard analysisResult={analysisResult} />}
 
-      {!analysisResult && (
-        <div className='flex justify-center mt-5'>
+      {/* Default Image */}
+      {!analysisResult && !loading && (
+        <div className="flex justify-center mt-5">
           <Image
             src={nurse}
             alt="Doctor"
             width={500}
             height={500}
+            className="rounded-lg shadow-lg"
           />
         </div>
       )}
+
+      
     </div>
   );
 };

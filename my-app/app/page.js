@@ -1,13 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
+import { Provider } from "jotai"; // Jotai Provider
 import { Maincomponents } from '@/components/Maincomponents';
 import { Question } from '@/components/Question';
 
 export default function Home() {
   return (
-    <div className="bg-red">
-      <Maincomponents />
-      <Question />
-    </div>
+    <Provider>
+      <div className="bg-red">
+        <Maincomponents />
+        <Question />
+      </div>
+    </Provider>
   );
 }
