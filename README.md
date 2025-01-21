@@ -1,6 +1,6 @@
 # Akıllı Tahlil: Yapay Zeka Destekli Sağlık Analizi Uygulaması
 
-Akıllı Tahlil, kullanıcıların tahlil verilerini **yapay zeka** ile analiz ederek sağlık durumları hakkında tahminlerde bulunan bir web uygulamasıdır. Projemiz, kullanıcıların PDF formatındaki tahlil verilerini yükleyip, bu verilerin sağlıkla ilgili olası yorumlarını almasına olanak sağlar. Sistem, kullanıcıya bir **yapay zeka analizi** sunduğunu açıkça belirterek, analizlerin tahminlere dayalı olduğunu vurgular.
+**Akıllı Tahlil**, kullanıcıların tahlil verilerini **yapay zeka** ile analiz ederek sağlık durumları hakkında tahminlerde bulunan bir web uygulamasıdır. Projemiz, kullanıcıların tahlil verilerini PDF formatında yükleyip, bu verilerin sağlıkla ilgili olası yorumlarını almasına olanak sağlar. Sistem, kullanıcıya bir **yapay zeka analizi** sunduğunu açıkça belirterek, analizlerin tahminlere dayalı olduğunu vurgular.
 
 Proje, **Next.js**, **Tailwind CSS**, **DaisyUI**, **Framer Motion**, **Jotai** ve **Gemini AI** gibi teknolojiler kullanılarak geliştirilmiştir.
 
@@ -19,10 +19,3 @@ Proje, **Next.js**, **Tailwind CSS**, **DaisyUI**, **Framer Motion**, **Jotai** 
 - **Jotai**: Uygulamanın state yönetimi için Jotai tercih edilmiştir.
 - **Gemini AI**: Tahlil verilerinin analizi için Gemini AI kullanılmıştır.
 
-## Kurulum
-
-Projeyi yerel bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
-
-1. **Repository'yi klonlayın**:
-   ```bash
-   git clone https://github.com/kullaniciadi/akilli-tahlil.git
