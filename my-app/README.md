@@ -19,10 +19,3 @@ Proje, **Next.js**, **Tailwind CSS**, **DaisyUI**, **Framer Motion**, **Jotai** 
 - **Jotai**: Uygulamanın state yönetimi için Jotai tercih edilmiştir.
 - **Gemini AI**: Tahlil verilerinin analizi için Gemini AI kullanılmıştır.
 
-## Kurulum
-
-Projeyi yerel bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
-
-1. **Repository'yi klonlayın**:
-   ```bash
-   git clone https://github.com/kullaniciadi/akilli-tahlil.git
