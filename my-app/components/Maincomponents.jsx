@@ -119,7 +119,7 @@ export const Maincomponents = () => {
 
         {/* Tahlil Sonucu Yükleme Kutusu */}
         <div className="w-full lg:w-1/2">
-          <div className="flex flex-col items-center border-2 border-dashed border-lacivert-200 rounded-md p-6 bg-white">
+          <div className="flex flex-col items-center border-2 border-dashed border-lacivert-200 rounded-md p-6 bg-antep-200">
             <span className="text-lg md:text-xl text-lacivert-200 text-center">Tahlil Sonucu Yükleme</span>
             <MdOutlineInput className="text-lacivert-200 text-3xl mt-4" />
             <div className="flex justify-center mt-6 w-full">

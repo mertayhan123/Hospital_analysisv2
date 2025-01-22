@@ -88,7 +88,7 @@ const SaglikKarnen = () => {
       content: analysisData?.sapmalar,
     },
     {
-      title: "Hastalıklar",
+      title: "Olası Hastalıklar",
       icon: <LightBulbIcon className="h-6 w-6 text-cyan-400" />,
       content: diseases,
     },

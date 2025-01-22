@@ -55,7 +55,7 @@ export const Question = () => {
           </div>
           <div className="collapse-content">
             <p>
-              “E-Nabız hesabınızdan tahlil sonuçlarını PDF veya Excel formatında indirerek platforma yükleyebilirsiniz.”
+              “E-Nabız hesabınızdan tahlil sonuçlarını PDF  formatında indirerek platforma yükleyebilirsiniz.”
             </p>
           </div>
         </div>
